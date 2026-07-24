@@ -16,8 +16,8 @@ jobs:
               uses: ruby/setup-ruby@v1
               
             - name: Install Fastlane
-              uses: gem install fastlane
+              run: gem install fastlane
              
             - name: Build iOS App
-              uses: fastlane build
+              run: fastlane build
               
