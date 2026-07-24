@@ -1,0 +1,23 @@
+name: iOS Build
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: macos-latest
+        
+        steps:
+            - uses: actions/checkout@v3
+          
+            - name: Setup Ruby
+              uses: ruby/setup-ruby@v1
+              
+            - name: Install Fastlane
+              uses: gem install fastlane
+             
+            - name: Build iOS App
+              uses: fastlane build
+              
