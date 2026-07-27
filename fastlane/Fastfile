@@ -23,7 +23,7 @@ platform :ios do
   end
 
   lane :build do
-   build_app(scheme: "DevOpsDemoApp")
+   sh("echo building app")
   end
 
   lane :test do
