@@ -6,9 +6,10 @@ on:
       - main
 
 jobs:
+
   test:
     runs-on: macos-latest
-
+    
     steps:
       - uses: actions/checkout@v4
 
@@ -19,3 +20,19 @@ jobs:
       - run: gem install fastlane
 
       - run: fastlane test
+      
+
+  build:
+    needs: test
+    runs-on: macos-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - run: gem install fastlane
+
+      - run: fastlane build
