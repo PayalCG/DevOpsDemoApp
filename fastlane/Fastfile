@@ -23,11 +23,12 @@ platform :ios do
   end
 
   lane :test do
-   run_tests(scheme: "DevOpsDemoApp")
+   run_tests(scheme: "DevOpsDemoApp"),
+   output_directory: "./test_output"
   end
 
   lane :build do
-   sh("echo building app")
+   sh("echo building app > build.log")
   end
 
  	
