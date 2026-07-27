@@ -26,4 +26,12 @@ platform :ios do
    build_app(scheme: "DevOpsDemoApp")
   end
 
+  lane :test do
+   run_tests(scheme: "DevOpsDemoApp")
+  end
+
+
+
+ 	
+
 end
