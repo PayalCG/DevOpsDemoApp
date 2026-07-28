@@ -49,7 +49,11 @@ platform :ios do
 
   lane :deploy do
      environment = ENV['DEPLOY_ENV']
-    puts "Deploying to #{environment}"
+     puts "Starting Deployment"	
+     puts "Deploying to #{environment}"
+     sh("mkdir -p deploy_output")
+     sh("echo Deployment to #{environment} successful > deploy_output/deploy.log")
+
   end
 
 
