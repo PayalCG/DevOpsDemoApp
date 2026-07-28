@@ -1,0 +1,11 @@
+name: Main CI
+
+on:
+    workflow_dispatch:
+    
+jobs:
+    call-test:
+        uses: ./.github/workflows/reusable-test.yml
+
+        with:
+            environment: staging
