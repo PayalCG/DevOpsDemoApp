@@ -14,6 +14,7 @@ struct ContentView: View {
             List {
                 ForEach(1..<11) { index in
                     Text("Row number \(index)")
+                    
                     Image("star")
                         .resizable()
                         .scaledToFit()

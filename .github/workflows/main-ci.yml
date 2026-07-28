@@ -12,5 +12,4 @@ jobs:
     call-test:
         uses: ./.github/workflows/reusable-test.yml
         with:
-        with:
             environment: staging
