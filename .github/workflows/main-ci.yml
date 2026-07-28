@@ -1,57 +1,52 @@
 name: Main CI
 
 on:
-    push:
-        branches:
-            - main
-    pull_request:
-        branches:
-            - main
-    
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
 jobs:
-    call-test:
-        uses: ./.github/workflows/reusable-test.yml
-        with:
-            environment: staging
-        
-    security:
-        needs: call-test
-        runs-on: macos-latest
-    
-        steps:
-            - uses: actions/checkout@v3
-        
-            - name: Security scan
-            run: echo "Running security scan"
+  call-test:
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      environment: staging
 
-    build:
-        needs: security
-        runs-on: macos-latest
+  security:
+    needs: call-test
+    runs-on: macos-latest
     
-        steps:
-            - uses: actions/checkout@v3
-            - run: gem install fastlane
-            - run: fastlane build
-        
-    deploy:
-        needs: build
-        runs-on: macos-latest
-    
-        steps:
-            - uses: actions/checkout@v3
-            - run: gem install fastlane
-            - run: fastlane deploy
+    steps:
+        - uses: actions/checkout@v4
+        - name: Security scan
+          run: echo "running security_scan"
 
-    
-    notify:
-        needs: build
-        runs-on: macos-latest
-    
-        steps:
-            - uses: actions/checkout@v3
-            - run: gem install fastlane
-            - run: fastlane notify
+  build:
+    needs: security
+    runs-on: macos-latest
+    steps:
+        - uses: actions/checkout@v4
+        - run: gem install fastlane
+          run: fastlane build
+
+  deploy:
+    needs: build
+    runs-on: macos-latest
+    steps:
+        - uses: actions/checkout@v4
+        - run: gem install fastlane
+          run: fastlane deploy
 
 
-    
+  notify:
+    needs: build
+    runs-on: macos-latest
+    steps:
+        - uses: actions/checkout@v4
+        - run: gem install fastlane
+          run: fastlane notify
 
+    
