@@ -10,6 +10,12 @@ jobs:
   test:
     runs-on: macos-latest
     
+    env:
+     APP_NAME: ${{vars.APP_NAME}}
+     App_VERSION: ${{vars.App_VERSION}}
+     API_KEY: ${{secrets.API_KEY}}
+     DEPLOY_ENV: staging
+     
     steps:
       - uses: actions/checkout@v4
 

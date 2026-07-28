@@ -32,5 +32,24 @@ platform :ios do
   end
 
  	
+  lane :info do
+    puts "Application Name: #{ENV['APP_NAME']}"
+    puts "Version: #{ENV['APP_VERSION']}" 
+  end
+
+  lane :secrets_check do
+    if ENV['API_KEY']
+	puts "Secretes received successfully"
+    else 
+        puts "Secret missing"
+  end
+
+
+  lane :deploy do
+     environment = ENV['DEPLOY_ENV']
+    puts "Deploying to # {environment}"
+    
+  end
+
 
 end
