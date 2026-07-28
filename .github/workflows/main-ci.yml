@@ -13,3 +13,47 @@ jobs:
         uses: ./.github/workflows/reusable-test.yml
         with:
             environment: staging
+        
+security:
+    needs: test
+    runs-on: macos-latest
+    
+    steps:
+        - uses: actions/checkout@v3
+        
+        - name: Security scan
+          run: echo "Running security scan"
+
+build:
+    needs: security
+    runs-on: macos-latest
+    
+    steps:
+        - uses: actions/checkout@v3
+        - run: gem install fastlane
+        - run: fastlane build
+        
+deploy:
+    needs: build
+    runs-on: macos-latest
+    
+    steps:
+        - uses: actions/checkout@v3
+        - run: gem install fastlane
+        - run: fastlane deploy
+
+    
+notify:
+    needs: build
+    runs-on: macos-latest
+    
+    steps:
+        - uses: actions/checkout@v3
+        
+        -run: gem install fastlane
+        
+        -run: fastlane notify
+
+
+    
+
