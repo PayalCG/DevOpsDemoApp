@@ -14,7 +14,7 @@ jobs:
         with:
             environment: staging
         
-security:
+  security:
     needs: test
     runs-on: macos-latest
     
@@ -24,7 +24,7 @@ security:
         - name: Security scan
           run: echo "Running security scan"
 
-build:
+  build:
     needs: security
     runs-on: macos-latest
     
@@ -33,7 +33,7 @@ build:
         - run: gem install fastlane
         - run: fastlane build
         
-deploy:
+  deploy:
     needs: build
     runs-on: macos-latest
     
@@ -43,7 +43,7 @@ deploy:
         - run: fastlane deploy
 
     
-notify:
+  notify:
     needs: build
     runs-on: macos-latest
     
