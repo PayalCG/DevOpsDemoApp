@@ -30,7 +30,7 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         - run: gem install fastlane
-          run: fastlane build
+        - run: fastlane build
 
   deploy:
     needs: build
@@ -38,7 +38,7 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         - run: gem install fastlane
-          run: fastlane deploy
+        - run: fastlane deploy
 
 
   notify:
@@ -47,6 +47,6 @@ jobs:
     steps:
         - uses: actions/checkout@v4
         - run: gem install fastlane
-          run: fastlane notify
+        - run: fastlane notify
 
     
