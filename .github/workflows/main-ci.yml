@@ -1,11 +1,16 @@
 name: Main CI
 
 on:
-    workflow_dispatch:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
     
 jobs:
     call-test:
         uses: ./.github/workflows/reusable-test.yml
-
+        with:
         with:
             environment: staging
