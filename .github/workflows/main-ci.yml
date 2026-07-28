@@ -49,10 +49,8 @@ notify:
     
     steps:
         - uses: actions/checkout@v3
-        
-        -run: gem install fastlane
-        
-        -run: fastlane notify
+        - run: gem install fastlane
+        - run: fastlane notify
 
 
     
