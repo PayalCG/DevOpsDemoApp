@@ -26,6 +26,12 @@ jobs:
 
       - run: fastlane test
 
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: test_output
+
   build:
     needs: test
     runs-on: macos-latest
@@ -40,39 +46,34 @@ jobs:
       - run: gem install fastlane
 
       - run: fastlane build
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: build.log
+
+  deploy:
+    needs: build
+    runs-on: macos-latest
+
+    env:
+      DEPLOY_ENV: staging
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - run: gem install fastlane
+
+      - run: fastlane deploy
       
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
           with:
-            name: build-log
-            path: build.log
-   
-  deploy:
-     if: github.ref == 'refs/heads/main'
-    
-     needs: build
-     runs-on: macos-latest
-    
-     environment:
-         name: staging
-        
-     env:
-         DEPLOY_ENV: staging
-        
-     steps:
-       - uses: actions/checkout@v4
-      
-       - uses: ruby/setup-ruby@v1
-         with:
-           ruby-version: '3.2'
-
-       - run: gem install fastlane
-
-       - run: fastlane deploy
-      
-       - name: Upload Build Artifacts
-         uses: actions/upload-artifact@v4
-         with:
-           name: deploy-log
-           path: deploy_output
+            name: deploy-log
+            path: deploy_output
 
