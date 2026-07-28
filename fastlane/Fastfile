@@ -47,8 +47,7 @@ platform :ios do
 
   lane :deploy do
      environment = ENV['DEPLOY_ENV']
-    puts "Deploying to # {environment}"
-    
+    puts "Deploying to #{environment}"
   end
 
 
