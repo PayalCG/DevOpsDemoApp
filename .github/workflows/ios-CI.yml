@@ -73,7 +73,7 @@ jobs:
       
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
-          with:
-            name: deploy-log
-            path: deploy_output
+        with:
+          name: deploy-log
+          path: deploy_output
 
