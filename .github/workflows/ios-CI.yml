@@ -6,14 +6,13 @@ on:
       - main
 
 jobs:
-
   test:
     runs-on: macos-latest
     
     env:
-      APP_NAME: ${{vars.APP_NAME}}
-      APP_VERSION: ${{vars.APP_VERSION}}
-      API_KEY: ${{secrets.API_KEY}}
+      APP_NAME: ${{ vars.APP_NAME }}
+      APP_VERSION: ${{ vars.APP_VERSION }}
+      API_KEY: ${{ secrets.API_KEY }}
       DEPLOY_ENV: staging
      
     steps:
