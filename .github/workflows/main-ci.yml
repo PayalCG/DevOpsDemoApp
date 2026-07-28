@@ -14,43 +14,43 @@ jobs:
         with:
             environment: staging
         
-  security:
-    needs: test
-    runs-on: macos-latest
+    security:
+        needs: call-test
+        runs-on: macos-latest
     
-    steps:
-        - uses: actions/checkout@v3
+        steps:
+            - uses: actions/checkout@v3
         
-        - name: Security scan
-          run: echo "Running security scan"
+            - name: Security scan
+            run: echo "Running security scan"
 
-  build:
-    needs: security
-    runs-on: macos-latest
+    build:
+        needs: security
+        runs-on: macos-latest
     
-    steps:
-        - uses: actions/checkout@v3
-        - run: gem install fastlane
-        - run: fastlane build
+        steps:
+            - uses: actions/checkout@v3
+            - run: gem install fastlane
+            - run: fastlane build
         
-  deploy:
-    needs: build
-    runs-on: macos-latest
+    deploy:
+        needs: build
+        runs-on: macos-latest
     
-    steps:
-        - uses: actions/checkout@v3
-        - run: gem install fastlane
-        - run: fastlane deploy
+        steps:
+            - uses: actions/checkout@v3
+            - run: gem install fastlane
+            - run: fastlane deploy
 
     
-  notify:
-    needs: build
-    runs-on: macos-latest
+    notify:
+        needs: build
+        runs-on: macos-latest
     
-    steps:
-        - uses: actions/checkout@v3
-        - run: gem install fastlane
-        - run: fastlane notify
+        steps:
+            - uses: actions/checkout@v3
+            - run: gem install fastlane
+            - run: fastlane notify
 
 
     
