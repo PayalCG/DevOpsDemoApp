@@ -56,5 +56,9 @@ platform :ios do
 
   end
 
+  lane :notify do
+     puts "pipeline Completed successfully"
+   end
+	
 
 end

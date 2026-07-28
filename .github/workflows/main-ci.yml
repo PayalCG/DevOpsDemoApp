@@ -1,11 +1,52 @@
 name: Main CI
 
 on:
-    workflow_dispatch:
-    
-jobs:
-    call-test:
-        uses: ./.github/workflows/reusable-test.yml
+  push:
+    branches:
+      - main
 
-        with:
-            environment: staging
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  call-test:
+    uses: ./.github/workflows/reusable-test.yml
+    with:
+      environment: staging
+
+  security:
+    needs: call-test
+    runs-on: macos-latest
+    
+    steps:
+        - uses: actions/checkout@v4
+        - name: Security scan
+          run: echo "running security_scan"
+
+  build:
+    needs: security
+    runs-on: macos-latest
+    steps:
+        - uses: actions/checkout@v4
+        - run: gem install fastlane
+        - run: fastlane build
+
+  deploy:
+    needs: build
+    runs-on: macos-latest
+    steps:
+        - uses: actions/checkout@v4
+        - run: gem install fastlane
+        - run: fastlane deploy
+
+
+  notify:
+    needs: build
+    runs-on: macos-latest
+    steps:
+        - uses: actions/checkout@v4
+        - run: gem install fastlane
+        - run: fastlane notify
+
+    
